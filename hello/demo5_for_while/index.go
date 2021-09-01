@@ -3,42 +3,47 @@ package main
 import "fmt"
 
 func main() {
-	fn1()
-	fn2("hello go")
-	fn3("good morning", 2)
-	const a, b = 2, 3
-	fmt.Printf("%d + %d = %d \n", 2, 3, sum(a, b))
-	var x, y int = swap(a, b)
-	fmt.Printf("%d,%d => %d,%d \n", x, y, a, b)
-
-	_x, _y, title := swapv2(10, 20)
-	fmt.Printf("%d,%d ,%s\n", _x, _y, title)
+	fnFor()
+	fnWile()
+	for_range()
+	foruserbreak()
 }
 
-func fn1() {
-	fmt.Println("fn1")
+func fnFor() {
+	for i := 0; i <= 10; i++ {
+		fmt.Println("for : ", i)
+	}
 }
 
-func fn2(msg string) {
-	fmt.Println(msg)
+func fnWile() {
+
+	var index int = 0
+	for index < 5 {
+
+		fmt.Println("while", index)
+		index++
+	}
 }
 
-func fn3(title string, version int) {
-	fmt.Println(title)
-	fmt.Println(version)
+func for_range() {
+	index := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 0}
+
+	for i, item := range index {
+		fmt.Printf("%d %d \n", i, item)
+	}
+
+	for _, item := range index {
+		fmt.Println(item)
+	}
 }
 
-func sum(a, b int) int {
-	return a + b
-}
-
-func swap(a int, b int) (int, int) {
-	return b, a
-}
-
-func swapv2(a int, b int) (x, y int, title string) {
-	x = b
-	y = a
-	title = "Reslt"
-	return
+func foruserbreak() {
+	i := 0
+	for true {
+		i++
+		if i > 5 {
+			break
+		}
+		fmt.Println("break : ", i)
+	}
 }
