@@ -15,19 +15,28 @@ var secreKry = "pongchai"
 
 func JwtVerify(c *gin.Context) {
 	tokenString := strings.Split(c.Request.Header["Authorization"][0], " ")[1]
-	token, err := jwt.Parse(tokenString, func(t *jwt.Token) (interface{}, error) {
-		if _, ok := t.Method.(*jwt.SigningMethodHMAC); !ok {
-			return nil, fmt.Errorf("Unexpected signing method: %v", t.Header["alg"])
+	fmt.Println(tokenString)
+	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
 		}
+
 		return []byte(secreKry), nil
 	})
 
 	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
 		fmt.Println(claims)
-		c.Set("jwt_username", claims["username"])
+
+		staffID := fmt.Sprintf("%v", claims["id"])
+		username := fmt.Sprintf("%v", claims["jwt_username"])
+		level := fmt.Sprintf("%v", claims["jwt_level"])
+		c.Set("jwt_staff_id", staffID)
+		c.Set("jwt_username", username)
+		c.Set("jwt_level", level)
+
 		c.Next()
 	} else {
-		c.JSON(http.StatusOK, gin.H{"result": "nok", "error": err})
+		c.JSON(http.StatusOK, gin.H{"result": "nok", "message": "invalid token", "error": err})
 		c.Abort()
 	}
 }

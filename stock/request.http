@@ -15,5 +15,57 @@ Content-Type: application/json
 }
 
 ### product
-GET  http://localhost:81/api/v2/product HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzM4NjE4MDcsImlkIjoxLCJsZXZlbCI6IjEiLCJ1c2VybmFtZSI6Inh4eCJ9.y3yu_ycoNyE83oJYWOUdVxCU-i9chHr2RJmpID4KpsA
+GET  http://localhost:81/api/v2/product?keyword=x HTTP/1.1
+#Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzM4NjE4MDcsImlkIjoxLCJsZXZlbCI6IjEiLCJ1c2VybmFtZSI6Inh4eCJ9.y3yu_ycoNyE83oJYWOUdVxCU-i9chHr2RJmpID4KpsA
+
+### productById
+GET  http://localhost:81/api/v2/product/3 HTTP/1.1
+
+### post product
+POST  http://localhost:81/api/v2/product HTTP/1.1
+Content-Type: multipart/form-data; boundary=----xxxxx
+
+------xxxxx
+Content-Disposition: form-data; name="name";
+
+iamo
+------xxxxx
+Content-Disposition: form-data; name="stock";
+
+1235
+------xxxxx
+Content-Disposition: form-data; name="price";
+
+555
+------xxxxx
+Content-Disposition: form-data; name="image"; filename="test.png"
+
+< ./test.png
+------xxxxx--
+
+
+### post product
+PUT  http://localhost:81/api/v2/product HTTP/1.1
+Content-Type: multipart/form-data; boundary=----xxxxx
+
+------xxxxx
+Content-Disposition: form-data; name="id";
+
+1
+------xxxxx
+Content-Disposition: form-data; name="name";
+
+xxx
+------xxxxx
+Content-Disposition: form-data; name="stock";
+
+567
+------xxxxx
+Content-Disposition: form-data; name="price";
+
+890
+------xxxxx
+Content-Disposition: form-data; name="image"; filename="test.png"
+
+< ./edit.png
+------xxxxx--

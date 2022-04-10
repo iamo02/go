@@ -1,0 +1,16 @@
+###addtrsnsaction
+POST http://localhost:81/api/v2/trsnsaction HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDk1Nzg1MDMsImlkIjoxLCJsZXZlbCI6IjEiLCJ1c2VybmFtZSI6Inh4eCJ9.rXq5WaChjNwOLuek2i6lY8QrCzp51sfWVJ2t7RIlMko
+Content-Type: application/json
+
+{
+  "total": 50.50,
+  "paid": 100,
+  "change": 49.50,
+  "payment_type": "cash",
+  "payment_detail": "full",
+  "order_list": "[]"
+}
+
+###get trsnsaction
+GET http://localhost:81/api/v2/trsnsaction HTTP/1.1
